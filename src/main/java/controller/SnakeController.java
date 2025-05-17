@@ -19,18 +19,21 @@ public class SnakeController {
         this.model = m;
         this.panel = p;
 
-        window.addKeyListener(new KeyAdapter() {
+        KeyAdapter keys = new KeyAdapter() {
             @Override public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
-                    case KeyEvent.VK_UP    -> model.turn(Direction.UP);
-                    case KeyEvent.VK_DOWN  -> model.turn(Direction.DOWN);
-                    case KeyEvent.VK_LEFT  -> model.turn(Direction.LEFT);
-                    case KeyEvent.VK_RIGHT -> model.turn(Direction.RIGHT);
-                    case KeyEvent.VK_SPACE ->
-                         { if (model.getState() == GameState.GAME_OVER) model.reset(); }
+                    case KeyEvent.VK_UP,    KeyEvent.VK_W -> model.turn(Direction.UP);
+                    case KeyEvent.VK_DOWN,  KeyEvent.VK_S -> model.turn(Direction.DOWN);
+                    case KeyEvent.VK_LEFT,  KeyEvent.VK_A -> model.turn(Direction.LEFT);
+                    case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> model.turn(Direction.RIGHT);
+                    case KeyEvent.VK_SPACE -> {
+                        if (model.getState() == GameState.GAME_OVER) model.reset();
+                    }
                 }
             }
-        });
+        };
+
+        panel.addKeyListener(keys);
     }
 
     public void start() {
@@ -41,5 +44,7 @@ public class SnakeController {
         timer.start();           // **两者都在 EDT 中运行**
     }
 
+    public void pause()  { if (timer != null) timer.stop();  }
+    public void resume() { if (timer != null) timer.start(); }
     public void shutdown() { if (timer != null) timer.stop(); }
 }
