@@ -70,14 +70,14 @@ public class SnakePanel extends JPanel {
                        Constants.UNIT - 4, Constants.UNIT - 4);
 
         // HUD
-        g.setColor(Color.black);
+        g.setColor(Color.WHITE);
         g.setFont(new Font("Consolas", Font.BOLD, 16));
         g.drawString("Score: " + model.getScore(), 10, 20);
     }
 
     private void drawGameOver(Graphics2D g) {
         String msg = "Game Over - Press SPACE";
-        g.setColor(Color.black);
+        g.setColor(Color.WHITE);
         g.setFont(new Font("Consolas", Font.BOLD, 32));
         int w = g.getFontMetrics().stringWidth(msg);
         int midX = (getWidth() - w) / 2;
