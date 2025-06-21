@@ -1,4 +1,4 @@
-package src.main.java.view;
+package snake.view;
 
 import javax.swing.*;
 import java.awt.*;
